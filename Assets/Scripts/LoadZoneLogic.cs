@@ -3,8 +3,8 @@ using UnityEngine;
 public class LoadZoneLogic : MonoBehaviour
 {
 
-    [SerializeField] SceneEnum ifUnloadedLoadScene;
-    [SerializeField] SceneEnum ifLoadedUnloadScene;
+    [SerializeField] SceneEnum[] ifUnloadedLoadScene;
+    [SerializeField] SceneEnum[] ifLoadedUnloadScene;
     void Awake()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -20,11 +20,18 @@ public class LoadZoneLogic : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (ifLoadedUnloadScene != SceneEnum.NONE)
-                PersitentLoader.instance.LoadToUnload(ifLoadedUnloadScene);
+            foreach(SceneEnum i in ifLoadedUnloadScene)
+            {
+                if (i != SceneEnum.NONE)
+                    PersitentLoader.instance.LoadToUnload(i);
+            }
 
-            if (ifUnloadedLoadScene != SceneEnum.NONE)
-                PersitentLoader.instance.UnLoadToLoad(ifUnloadedLoadScene);
+            foreach (SceneEnum i in ifUnloadedLoadScene)
+            {
+                if (i != SceneEnum.NONE)
+                    PersitentLoader.instance.UnLoadToLoad(i);
+            }
+
         }
     }
 }

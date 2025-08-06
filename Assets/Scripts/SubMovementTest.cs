@@ -18,6 +18,6 @@ public class SubMovementTest : MonoBehaviour
         Vector3 horVect = Vector3.right * horMovement;
         Vector3 vertVect = Vector3.up * vertMovement;
         Vector3 finalMove = vertVect + horVect;
-        rB.AddForce(finalMove*speed);
+        rB.AddForce(finalMove.normalized*speed);
     }
 }
