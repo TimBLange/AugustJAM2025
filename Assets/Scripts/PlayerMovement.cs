@@ -20,9 +20,14 @@ public class Player3DSub : PlayerState
         float vertMovement = Input.GetAxis("Vertical");
 
         Vector3 horVect = PM.cam.transform.right * horMovement;
-        Vector3 vertVect = PM.cam.transform.forward * vertMovement;
+        Vector3 vertVect = GetCamFoward(PM.cam.transform.forward) * vertMovement;
         Vector3 finalMove = vertVect + horVect;
-        PM.chCtr.Move(finalMove.normalized * PM.PLAYER3DSPEED*Time.fixedDeltaTime);
+        PM.chCtr.Move(PM.PLAYER3DSPEED * Time.fixedDeltaTime * finalMove.normalized);
+
+        Vector3 GetCamFoward(Vector3 baseForward)
+        {
+            return new Vector3(baseForward.x, 0, baseForward.z).normalized;
+        }
     }
     public override void OnEnd(PlayerMovement PM)
     {
