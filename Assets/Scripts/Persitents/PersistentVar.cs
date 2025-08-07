@@ -6,6 +6,7 @@ public class PersistentVar : MonoBehaviour
     [SerializeField] public CinemachineCamera SubCam2D;
     [SerializeField] public CinemachineCamera SubCam2DZoom;
     [SerializeField] public CinemachineCamera FPCam;
+    
     void Awake()
     {
         if (instance == null)
@@ -17,6 +18,15 @@ public class PersistentVar : MonoBehaviour
             Debug.LogError("WARNING, THERE ARE 2 PERSITENTVARS");
         }
     }
-
     
+    public Vector3 GetFPFoward()
+    {
+        return FPCam.transform.forward;
+    }
+
+    public Vector3 GetFPRight()
+    {
+        return FPCam.transform.right;
+    }
+
 }
